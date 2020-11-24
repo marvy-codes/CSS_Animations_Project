@@ -1,0 +1,233 @@
+/*  */
+@keyframes over-and-back { /* Names the animation */ 
+    0% {
+        background-color: hsl(0, 50%, 50%);
+        transform: translate(0);
+    }
+    50% {
+        transform: translate(50px);
+    }
+    100% {
+        background-color: hsl(270, 50%, 90%);
+        transform: translate(0);
+    }
+}
+.box {
+    padding-left: 1.5em;
+    width: 80px;
+    height: 16px;
+    background-color: green;
+    animation: over-and-back 1.5s linear 3; /* animation-iteration-count = 8 times */
+}
+
+
+html {
+    box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+body {
+    background-color: hsl(200, 80%, 30%); 
+    background-image: radial-gradient(hsl(200, 80%, 30%), hsl(210, 80%, 20%)); 
+    color: white;
+    font-family: Raleway, Helvetica, Arial, sans-serif;
+    line-height: 1.4;
+    margin: 0;
+    min-height: 100vh; 
+}
+h1, h2, h3 {
+    font-family: Alfa Slab One, serif;
+    font-weight: 400;
+}
+main {
+    display: block;
+}
+img {
+    max-width: 100%;
+}
+.page-header {
+    margin: 0;
+    padding: 1rem; 
+}
+@media (min-width: 30em) {
+    .page-header {
+        padding: 2rem 2rem 3rem;
+    }
+} 
+
+@media (min-width: 30em) { 
+    .main-nav {
+        position: fixed;
+        top: 8.25rem;
+        left: 0;
+        z-index: 10; 
+        background-color: transparent;
+        transition: background-color .5s linear;
+        border-top-right-radius: 0.5em;
+        border-bottom-right-radius: 0.5em;
+    }
+    .main-nav:hover {
+        background-color: rgba(0, 0, 0, 0.4); 
+    }
+}
+
+.nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    padding: 0 1rem;
+    list-style: none;
+}
+.nav-links > li + li {
+    margin-left: 0.8em;
+}
+.nav-links > li > a {
+    display: block;
+    padding: 0.8em 0;
+    color: white;
+    font-size: 0.8rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+.nav-links__icon {
+    height: 1.5em;
+    width: 1.5em;
+    vertical-align: -0.2em; 
+}
+   .nav-links > li > a:hover {
+    color: hsl(40, 100%, 70%);
+}
+
+@media (min-width: 30em) { 
+    .nav-links {
+        display: block;
+        padding: 1em;
+        margin-bottom: 0;
+    }
+    .nav-links > li + li {
+        margin-left: 0;
+    }
+    .nav-links__label {
+        display: inline-block; 
+        margin-left: 1em;
+        padding-right: 1em;
+        opacity: 0; 
+        transform: translate(-1em); 
+        transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.3), 
+                    opacity 0.4s linear; 
+    }
+    .nav-links:hover .nav-links__label,  
+    .nav-links a:focus > .nav-links__label { 
+    opacity: 1;
+    transform: translate(0); 
+    }
+
+    .nav-links__icon {
+        transition: transform 0.2s ease-out; 
+    }
+    .nav-links a:hover > .nav-links__icon,
+    .nav-links a:focus > .nav-links__icon {
+        transform: scale(1.3);
+    }
+}
+.nav-links > li:nth-child(2) .nav-links__label {
+    transition-delay: 0.1s;
+}
+   .nav-links > li:nth-child(3) .nav-links__label {
+    transition-delay: 0.2s;
+}
+   .nav-links > li:nth-child(4) .nav-links__label {
+    transition-delay: 0.3s;
+}
+   .nav-links > li:nth-child(5) .nav-links__label {
+    transition-delay: 0.4s;
+}
+
+/* Mobile styles for the cards. */
+.flyin-grid {
+    margin: 0 1rem;
+    perspective: 500px; /* Sets a shared perspective on the container */
+}
+
+
+.flyin-grid__item {
+    animation: fly-in 600ms ease-in; /* Applies animation to each item */
+    animation-fill-mode: backwards; /* Applies first frame animation styles before animation begins */
+}
+.flyin-grid__item:nth-child(2) {
+    animation-delay: 0.15s;
+}
+.flyin-grid__item:nth-child(3) {
+    animation-delay: 0.3s;
+}
+.flyin-grid__item:nth-child(4) {
+    animation-delay: 0.45s;
+} /* Staggers the start of each items animation a little longer than the previous item. */
+
+
+@keyframes fly-in {
+    0% {
+        transform: translateZ(-800px) rotateY(90deg); /* starts in the distance rotated */
+        opacity: 0;
+    }
+    56% {
+        transform: translateZ(-160px) rotateY(87deg); /* much closer but still mostly rotated */
+        opacity: 1;
+    }
+    100% {
+        transform: translateZ(0) rotateY(0); /* Finishes in normal position */
+    }
+}
+   
+
+.flyin-grid {
+    margin: 0 1rem;
+   }
+@media (min-width: 30em) {
+    .flyin-grid {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 5rem;
+    }
+    .flyin-grid__item { /* flex container with wrapping, and increases padding on each sides */
+        flex: 1 1 300px;
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+        max-width: 600px;
+    }
+    @supports (display: grid) { /* grid support within a media query block. */
+    .flyin-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-gap: 2em;
+    }
+    .flyin-grid__item {
+        max-width: initial;
+        margin: 0; /* removes the margin applied by the fallback layout */
+        }
+    }
+}
+
+
+.card {
+    margin-bottom: 1em;
+    padding: 0.5em;
+    background-color: white;
+    color: hsl(210, 15%, 20%);
+    box-shadow: 0.2em 0.5em 1em rgba(0, 0, 0, 0.3);
+}
+.card > img {
+    width: 100%;
+}
+
+/* ---> Adding animations to the layout.
+    They’ll start so they appear off in the distance, rotated 90 degrees around a vertical axis. Then the cards will fly in toward the viewer and, near the end of the 
+    animation, rotate to face the user directly.
+    This contains two transfroms: translateZ() and rotateY()
+*/
+
